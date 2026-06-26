@@ -20,6 +20,8 @@ jobs:
 
       - name: Run tests with coverage
         working-directory: sonar-scanner/src/python
+        env:
+          PYTHONPATH: ${{ github.workspace }}/sonar-scanner/src/python
         run: pytest tests/ --cov=. --cov-report=xml
 
       - name: Upload coverage reports to Codecov
