@@ -43,7 +43,7 @@ class Triangle(Polygon):
         
 
     def area(self):
-        return self.base * self.height # failing test example
+        return self.base * self.height / 2
     
 
 class Quadrilateral(Polygon):
