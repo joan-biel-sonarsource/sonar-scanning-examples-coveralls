@@ -29,4 +29,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: sonar-scanner/src/python/coverage.xml
-          root_dir: sonar-scanner/src/python
+          disable_search: true
