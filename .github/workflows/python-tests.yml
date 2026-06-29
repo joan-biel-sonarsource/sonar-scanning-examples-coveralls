@@ -28,3 +28,5 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: sonar-scanner/src/python/coverage.xml
+          root_dir: sonar-scanner/src/python
