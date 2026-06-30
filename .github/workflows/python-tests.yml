@@ -1,0 +1,30 @@
+name: Python tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pytest and coverage
+        run: pip install pytest pytest-cov
+
+      - name: Run tests with coverage
+        working-directory: sonar-scanner/src/python
+        env:
+          PYTHONPATH: ${{ github.workspace }}/sonar-scanner/src/python
+        run: pytest tests/ --cov=. --cov-report=xml
+
+      - name: Report coverage to Coveralls
+        run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls report sonar-scanner/src/python/coverage.xml
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
